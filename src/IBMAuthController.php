@@ -23,8 +23,7 @@ class GitHubAuthController extends AbstractOAuth2Controller
      * @param AuthenticationResponseFactory $authResponse
      * @param SettingsRepositoryInterface $settings
      */
-    public function __construct(AuthenticationResponseFactory $authResponse, SettingsRepositoryInterface $settings)
-    {
+    public function __construct(AuthenticationResponseFactory $authResponse, SettingsRepositoryInterface $settings) {
         $this->settings = $settings;
         $this->authResponse = $authResponse;
     }
@@ -32,8 +31,7 @@ class GitHubAuthController extends AbstractOAuth2Controller
     /**
      * {@inheritdoc}
      */
-    protected function getProvider($redirectUri)
-    {
+    protected function getProvider($redirectUri) {
         return new Provider([
             'clientId'     => $this->settings->get('flarum-auth-github.client_id'),
             'clientSecret' => $this->settings->get('flarum-auth-github.client_secret'),
@@ -44,16 +42,14 @@ class GitHubAuthController extends AbstractOAuth2Controller
     /**
      * {@inheritdoc}
      */
-    protected function getAuthorizationUrlOptions()
-    {
+    protected function getAuthorizationUrlOptions() {
         return ['scope' => ['user:email']];
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getIdentification(ResourceOwner $resourceOwner)
-    {
+    protected function getIdentification(ResourceOwner $resourceOwner) {
         return [
             'email' => $resourceOwner->getEmail() ?: $this->getEmailFromApi()
         ];
@@ -62,8 +58,7 @@ class GitHubAuthController extends AbstractOAuth2Controller
     /**
      * {@inheritdoc}
      */
-    protected function getSuggestions(ResourceOwner $resourceOwner)
-    {
+    protected function getSuggestions(ResourceOwner $resourceOwner) {
         return [
             'username' => $resourceOwner->getNickname(),
             'avatarUrl' => array_get($resourceOwner->toArray(), 'avatar_url')

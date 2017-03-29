@@ -7,22 +7,11 @@ use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
 
-class Provider extends AbstractProvider
-{
+class Provider extends AbstractProvider {
+
     use BearerAuthorizationTrait;
 
-    /**
-     * Domain
-     *
-     * @var string
-     */
     public $domain = 'https://github.com';
-
-    /**
-     * Api domain
-     *
-     * @var string
-     */
     public $apiDomain = 'https://api.github.com';
 
     /**
@@ -30,8 +19,7 @@ class Provider extends AbstractProvider
      *
      * @return string
      */
-    public function getBaseAuthorizationUrl()
-    {
+    public function getBaseAuthorizationUrl() {
         return $this->domain.'/login/oauth/authorize';
     }
 
@@ -42,8 +30,7 @@ class Provider extends AbstractProvider
      *
      * @return string
      */
-    public function getBaseAccessTokenUrl(array $params)
-    {
+    public function getBaseAccessTokenUrl(array $params) {
         return $this->domain.'/login/oauth/access_token';
     }
 
@@ -54,8 +41,7 @@ class Provider extends AbstractProvider
      *
      * @return string
      */
-    public function getResourceOwnerDetailsUrl(AccessToken $token)
-    {
+    public function getResourceOwnerDetailsUrl(AccessToken $token) {
         if ($this->domain === 'https://github.com') {
             return $this->apiDomain.'/user';
         }
@@ -70,8 +56,7 @@ class Provider extends AbstractProvider
      *
      * @return array
      */
-    protected function getDefaultScopes()
-    {
+    protected function getDefaultScopes(){
         return [];
     }
 
@@ -85,8 +70,7 @@ class Provider extends AbstractProvider
      * @param  string $data Parsed response data
      * @return void
      */
-    protected function checkResponse(ResponseInterface $response, $data)
-    {
+    protected function checkResponse(ResponseInterface $response, $data){
         if ($response->getStatusCode() >= 400) {
             throw GithubIdentityProviderException::clientException($response, $data);
         } elseif (isset($data['error'])) {
@@ -101,10 +85,8 @@ class Provider extends AbstractProvider
      * @param AccessToken $token
      * @return League\OAuth2\Client\Provider\ResourceOwnerInterface
      */
-    protected function createResourceOwner(array $response, AccessToken $token)
-    {
-        $user = new GithubResourceOwner($response);
-
+    protected function createResourceOwner(array $response, AccessToken $token){
+        $user = new ResourceOwner($response);
         return $user->setDomain($this->domain);
     }
 }
