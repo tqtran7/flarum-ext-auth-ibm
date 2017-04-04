@@ -1,5 +1,5 @@
 {
-    "name": "flarum/flarum-ext-auth-ibm",
+    "name": "tqtran7/flarum-ext-auth-ibm",
     "description": "Allow users to log in with IBM credentials.",
     "type": "flarum-extension",
     "keywords": ["authentication"],
@@ -11,7 +11,7 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/flarum/core/issues",
+        "issues": "https://github.com/flarum/core/issues"
     },
     "require": {
         "flarum/core": "^0.1.0-beta.6",

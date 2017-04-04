@@ -1,9 +1,7 @@
 <?php
 /*
  * This file is part of Flarum.
- *
- * (c) Toby Zerner <toby.zerner@gmail.com>
- *
+ * (c) Thai Tran <tqtran@us.ibm.com>
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -63,9 +61,6 @@ class SSOFromCookie implements MiddlewareInterface
 }
 
 class SSO {
-
-  // Simplified class borrowed from IBM sso
-  // to decrypt information stored in cookie
 
 	public function __construct() {
 		$configFile = parse_ini_file( dirname( __FILE__ ) . "/sso.ini");
