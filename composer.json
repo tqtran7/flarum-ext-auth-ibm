@@ -11,7 +11,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/flarum/core/issues"
+        "issues": "https://github.com/tqtran7/flarum-ext-auth-ibm/issues",
+        "source": "https://github.com/tqtran7/flarum-ext-auth-ibm"
     },
     "require": {
         "flarum/core": "^0.1.0-beta.6"
@@ -22,11 +23,8 @@
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
-        },
         "flarum-extension": {
-            "title": "IBM Login",
+            "title": "IBM SSO",
             "icon": {
                 "name": "ibm",
                 "backgroundColor": "#eee",
