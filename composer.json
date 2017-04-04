@@ -1,6 +1,7 @@
 {
     "name": "tqtran7/flarum-ext-auth-ibm",
     "description": "Allow users to log in with IBM credentials.",
+    "minimum-stability": "dev",
     "type": "flarum-extension",
     "keywords": ["authentication"],
     "license": "MIT",
