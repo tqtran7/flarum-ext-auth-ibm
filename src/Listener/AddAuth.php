@@ -9,6 +9,8 @@
 namespace Flarum\Auth\IBM\Listener;
 
 use Flarum\Event\ConfigureMiddleware;
+use Flarum\Foundation\Application;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddAuth {
@@ -27,8 +29,7 @@ class AddAuth {
      * @param SettingsRepositoryInterface $settings
      * @param Application $app
      */
-    public function __construct(SettingsRepositoryInterface $settings, Application $app)
-    {
+    public function __construct(SettingsRepositoryInterface $settings, Application $app) {
         $this->settings = $settings;
         $this->app = $app;
     }
@@ -45,9 +46,8 @@ class AddAuth {
      */
     public function configureMiddleware(ConfigureMiddleware $event) {
         if ($event->isForum()) {
-            $event->pipe->pipe($path, $app->make('Flarum\Auth\IBM\SSOFromCookie'));
-            $event->pipe->pipe($path, $app->make('Flarum\Http\Middleware\AuthenticateWithSession'));
+            $event->pipe->pipe($path, $this->app->make('Flarum\Auth\IBM\SSOFromCookie'));
+            $event->pipe->pipe($path, $this->app->make('Flarum\Http\Middleware\AuthenticateWithSession'));
         }
-        $something = 123;
     }
 }
