@@ -46,6 +46,8 @@ class AddAuth {
      */
     public function configureMiddleware(ConfigureMiddleware $event) {
         if ($event->isForum()) {
+            //$path = $this->settings->get('favicon_path');
+            $path = parse_url($this->app->url(), PHP_URL_PATH);
             $event->pipe->pipe($path, $this->app->make('Flarum\Auth\IBM\SSOFromCookie'));
             $event->pipe->pipe($path, $this->app->make('Flarum\Http\Middleware\AuthenticateWithSession'));
         }
